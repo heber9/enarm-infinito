@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENARM Infinito</title>
+<style>
+:root{--bg:#0a0d14;--s1:#0e1420;--s2:#131c2e;--bd:#1a2540;--t1:#eef0fa;--t2:#6b7aad;--t3:#2e3d6a;--ok:#22c55e;--err:#ef4444;--acc:#3b82f6;--ylw:#f59e0b;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--t1);font-family:system-ui,-apple-system,sans-serif;min-height:100vh;}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.wrap{max-width:740px;margin:0 auto;padding:20px 16px 80px;}
+
+.hdr{padding:16px 0 14px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:10px;}
+.hdr-left{display:flex;align-items:center;gap:10px;}
+.logo{width:36px;height:36px;background:linear-gradient(135deg,#1a4a8a,#3b82f6);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;}
+.hdr-title{font-size:16px;font-weight:600;}
+.hdr-sub{font-size:11px;color:var(--t2);}
+.stats{display:flex;gap:16px;}
+.stat-n{font-size:18px;font-weight:700;font-family:monospace;line-height:1;}
+.stat-l{font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:.08em;}
+
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border:none;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;transition:.15s;font-family:inherit;}
+.btn-pri{background:linear-gradient(135deg,#1a3a7a,#3b82f6);color:#fff;}
+.btn-pri:hover{opacity:.9;transform:translateY(-1px);}
+.btn-pri:disabled{background:var(--bd);color:var(--t3);cursor:not-allowed;transform:none;}
+.btn-sec{background:var(--s1);color:var(--t2);border:1px solid var(--bd);}
+.btn-sec:hover{color:var(--t1);border-color:var(--t2);}
+.btn-sm{font-size:12px;padding:6px 13px;}
+
+.screen{animation:up .3s ease;}
+
+.home-hero{text-align:center;padding:40px 0 32px;}
+.home-icon{font-size:40px;margin-bottom:14px;}
+.home-title{font-size:26px;font-weight:700;letter-spacing:-.4px;margin-bottom:6px;}
+.home-sub{font-size:14px;color:var(--t2);}
+.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:520px;margin:28px auto 0;}
+.mode-card{background:var(--s1);border:1.5px solid var(--bd);border-radius:12px;padding:20px 18px;cursor:pointer;transition:.15s;text-align:left;}
+.mode-card:hover{border-color:var(--acc);transform:translateY(-2px);}
+.mode-icon{font-size:24px;margin-bottom:10px;}
+.mode-name{font-size:15px;font-weight:600;margin-bottom:5px;}
+.mode-desc{font-size:12.5px;color:var(--t2);line-height:1.55;margin-bottom:12px;}
+.mode-tag{display:inline-block;padding:5px 14px;border-radius:6px;font-size:12px;font-weight:600;color:#fff;}
+
+.sec-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;color:var(--t2);margin-bottom:10px;}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:7px;margin-bottom:22px;}
+.tile{background:var(--s1);border:1.5px solid var(--bd);border-radius:8px;padding:10px 12px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:.12s;}
+.tile:hover{border-color:var(--acc);}
+.tile.on{background:rgba(59,130,246,.1);border-color:var(--acc);}
+.tile-n{font-size:13px;font-weight:500;flex:1;}
+.tile-ck{font-size:11px;color:var(--acc);font-weight:700;flex-shrink:0;}
+.pills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:22px;}
+.pill{padding:5px 12px;border:1.5px solid var(--bd);border-radius:99px;font-size:12px;font-weight:500;cursor:pointer;transition:.12s;background:transparent;}
+.pill:hover{border-color:var(--t2);}
+.pill.on{background:var(--s2);border-color:var(--acc);color:var(--t1);}
+.btn-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.hint{font-size:12px;color:var(--t3);}
+
+.top-bar{display:flex;align-items:center;gap:8px;margin-bottom:18px;flex-wrap:wrap;}
+.mode-badge{font-size:12px;color:var(--t2);}
+.stat-pill{margin-left:auto;background:var(--s1);border:1px solid var(--bd);border-radius:99px;padding:4px 12px;font-size:12px;font-family:monospace;}
+
+.load-box{text-align:center;padding:56px 0;}
+.spinner{width:26px;height:26px;border:2.5px solid var(--bd);border-top-color:var(--acc);border-radius:50%;margin:0 auto 12px;animation:spin .65s linear infinite;}
+.load-txt{font-size:13px;color:var(--t2);}
+
+.err-box{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:16px 18px;margin-bottom:14px;}
+.err-title{font-weight:600;font-size:14px;color:var(--err);margin-bottom:4px;}
+.err-msg{font-size:12.5px;color:var(--t2);margin-bottom:10px;line-height:1.5;}
+
+.caso-box{background:var(--s1);border-left:3px solid var(--acc);border-radius:0 10px 10px 0;padding:14px 16px;margin-bottom:12px;}
+.caso-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--acc);margin-bottom:5px;}
+.caso-txt{font-size:14px;color:var(--t2);line-height:1.65;}
+
+.q-card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:18px 20px;margin-bottom:12px;}
+.q-txt{font-size:17px;font-weight:500;line-height:1.55;}
+
+.opts{display:flex;flex-direction:column;gap:7px;margin-bottom:4px;}
+.opt{background:var(--s1);border:1.5px solid var(--bd);border-radius:8px;padding:12px 14px;cursor:pointer;display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--t1);text-align:left;width:100%;transition:.1s;font-family:inherit;}
+.opt:hover:not(:disabled){border-color:var(--acc);background:rgba(59,130,246,.05);}
+.opt:disabled{cursor:not-allowed;}
+.opt.ok{border-color:var(--ok)!important;background:rgba(34,197,94,.08)!important;}
+.opt.no{border-color:var(--err)!important;background:rgba(239,68,68,.06)!important;}
+.ltr{width:23px;height:23px;border:1.5px solid var(--t3);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;font-family:monospace;transition:.1s;}
+.opt.ok .ltr{background:var(--ok);border-color:var(--ok);color:#fff;}
+.opt.no .ltr{background:var(--err);border-color:var(--err);color:#fff;}
+
+.fb{border-left:3px solid;border-radius:0 8px 8px 0;padding:13px 16px;margin-top:10px;font-size:13.5px;line-height:1.65;animation:up .2s ease;}
+.fb.ok{background:rgba(34,197,94,.07);border-color:var(--ok);}
+.fb.no{background:rgba(239,68,68,.05);border-color:var(--err);}
+.fb-head{font-size:12px;font-weight:700;margin-bottom:5px;}
+.fb.ok .fb-head{color:var(--ok);}
+.fb.no .fb-head{color:var(--err);}
+.fb-body{color:var(--t2);}
+.clave-box{background:var(--s2);border:1px solid var(--bd);border-radius:6px;padding:8px 12px;margin-top:9px;}
+.clave-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--t2);display:block;margin-bottom:3px;}
+
+.q-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:14px;}
+.racha{font-size:13px;color:var(--ylw);font-weight:600;font-family:monospace;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr">
+    <div class="hdr-left">
+      <div class="logo">🧬</div>
+      <div><div class="hdr-title">ENARM Infinito</div><div class="hdr-sub">Preguntas ilimitadas con IA · Infectología</div></div>
+    </div>
+    <div class="stats" id="hdr-stats" style="display:none">
+      <div><div class="stat-n" id="s-ok" style="color:var(--ok)">0</div><div class="stat-l">Correctas</div></div>
+      <div><div class="stat-n" id="s-no" style="color:var(--err)">0</div><div class="stat-l">Incorrectas</div></div>
+      <div><div class="stat-n" id="s-pct" style="color:var(--acc)">—</div><div class="stat-l">%</div></div>
+    </div>
+  </div>
+  <div id="app"></div>
+</div>
+<script>
+const TEMAS=[{id:"ivu",n:"IVU",e:"💧"},{id:"exant",n:"Exantemáticas",e:"🔴"},{id:"dia",n:"Diarreas",e:"🦠"},{id:"vect",n:"Vectores",e:"🦟"},{id:"tb",n:"TB",e:"🫁"},{id:"vih",n:"VIH",e:"💊"},{id:"resp",n:"Respiratorio",e:"🌬️"},{id:"snc",n:"SNC",e:"🧠"},{id:"its",n:"ITS",e:"🔬"}];
+const ETIO={
+ivu:["E. coli cistitis (fimbrias P, TMP-SMX 1ª línea, nitrofurantoína solo cistitis NO pielonefritis)","S. saprophyticus (2ª causa mujer joven, resistente novobiocina, diferencial vs epidermidis)","Klebsiella IVU nosocomial (cápsula mucosa, BLEE → carbapenémico)","Proteus mirabilis (ureasa, orina alcalina, estruvita asta de ciervo, swarming)","Pielonefritis aguda (cilindros leucocitarios PATOGNOMÓNICOS parénquima, fluoroquinolona ambulatoria, ceftriaxona IV)","Pionefrosis (obstrucción + infección, urgencia quirúrgica, ATB no es suficiente)","Pielonefritis enfisematosa (gas intrarrenal diabético E. coli, nefrectomía urgente, mortalidad 40-50%)","Bacteriuria asintomática (tratar SOLO embarazo y antes de cirugía urológica)"],
+exant:["Sarampión Morbillivirus (manchas Koplik PATOGNOMÓNICAS 1-2d antes exantema, cefalocaudal, SSPE 7-10 años)","Escarlatina GAS (papel de lija + líneas Pastia + palidez Filatov, penicilina 10d previene FRA NO GNPE)","Rubéola (adenopatía retroauricular ANTES del exantema, SRC tríada Gregg: cardiopatía+cataratas+sordera)","Parvovirus B19 5ª enfermedad (bofetada → reticulado encaje, aplasia eritroide drepanocitosis, hydrops embarazo)","Roséola VHH-6 6ª enfermedad (fiebre alta 3-5d → cede bruscamente → exantema, crisis febriles 30%)","Varicela VVZ (cielo estrellado distintos estadios simultáneos, NO aspirina → Reye, aciclovir adultos/inmunocomp)","Kawasaki (fiebre ≥5d + 4 criterios, IVIG 2g/kg + AAS, aneurismas coronarios 20-25% sin tx)","VEB mononucleosis (adenopatía POSTERIOR, monospot+, NO ampicilina → exantema 80-100%, esplenomegalia)"],
+dia:["Rotavirus (lactantes invierno, SRO, vacuna, NO ATB)","Vibrio cholerae (agua de arroz, SRO mortalidad 50% sin ella → <1% con SRO, doxiciclina acorta)","Shigella (disentería, convulsiones febriles tóxico neurológico, 10-100 organismos, azitromicina)","Salmonella no tifoidea (NO ATB inmunocompetentes prolonga portador, SÍ si bacteriemia/inmunocomp)","S. Typhi fiebre tifoidea (fiebre escalonada + bradicardia relativa + manchas Faget, perforación ileal 3ª semana)","E. coli O157:H7 STEC (SHU = anemia+trombocitopenia+IRA, NO ATB ×5 riesgo, NO loperamida)","Clostridioides difficile (post-ATB, pseudomembranas colonoscopía, vancomicina VO o fidaxomicina, NO metronidazol 1ª línea)","S. aureus intoxicación (toxina preformada, inicio 1-6h, vómitos prominentes, autolimitado 24h)","Giardia lamblia (quistes ovalados 4 núcleos coproscópico, malabsorción crónica, metronidazol)","Entamoeba histolytica (trofozoítos con eritrocitos fagocitados = PATOGNOMÓNICO, absceso hepático pasta anchoa)"],
+vect:["Dengue Flavivirus DENV 1-4 (NS1 días 1-5, dolor retroorbitario, ADE 2ª infección viremia ×1000, NO AINE, cristaloides)","Zika Flavivirus (fiebre leve + exantema PRURIGINOSO + conjuntivitis bilateral, microcefalia AXL, SGB post-Zika)","Chikungunya Alphavirus (el que se encorva, artritis DEBILITANTE bilateral, 30-40% crónica, MXRA8)","Plasmodium falciparum (invade TODOS eritrocitos, malaria cerebral PfEMP1, artesunato IV OMS 2023 1ª línea)","Plasmodium vivax/ovale (hipnozoítos → recaídas verdaderas, cloroquina + primaquina, VERIFICAR G6PD)","Rickettsia rickettsii FMMR (garrapata, exantema centrípeto palmas+plantas, vasculitis endotelial, doxiciclina TODAS las edades, mortalidad 20-25%)"],
+tb:["M. tuberculosis BAAR (LAM inhibe fusión fagosoma-lisosoma, aerobio estricto, transmisión aerosol <5μm)","Triada clásica TB (tos >2-3 semanas + sudoración nocturna + pérdida de peso)","TB miliar (diseminación hematógena, nódulos 1-3mm bilaterales, urgencia diagnóstica y terapéutica)","TB vertebral Mal de Pott (D10-L1, cifosis angular, absceso frío psoas, paraplejia de Pott)","TB meníngea (LCR linfocitos + glucosa muy baja + ADA elevada + BAAR 10-40%)","Xpert MTB/RIF (2 horas, detecta TB + resistencia rifampicina, OMS 1ª prueba recomendada)","Esquema 2HRZE/4HR (H=neuropatía→piridoxina, R=hepatitis+CYP450, Z=hiperuricemia, E=neuritis óptica)","TB-MDR BPaLM (resistencia H+R, bedaquilina+pretomanid+linezolid+moxifloxacino, 6 meses)","TB-VIH (TARV a las 2 semanas, excepción meningitis TB diferir 4-6 semanas, SIRI paradójico)"],
+vih:["VIH CD4+CCR5/CXCR4 (SRA ELISA negativo → ARN VIH + Ag p24, período ventana, máxima transmisibilidad)","Definición SIDA CDC (CD4 <200 cel/µL O enfermedad definitoria de las 27 condiciones)","TARV universal Biktarvy TAF+FTC+BIC (todos los pacientes, meta CV <50, U=U indetectable=intransmisible)","PCP Pneumocystis (CD4 <200, TMP-SMX altas dosis + prednisona si PaO2 <70, profilaxis doble PCP+Toxo)","Criptococo meníngeo (anfotericina B + flucitosina 2 semanas → fluconazol, HIC punciones terapéuticas)","Toxoplasmosis cerebral (lesión en anillo CD4 <100, tratar EMPÍRICO, biopsia solo si no responde 2 semanas)","CMV retinitis queso y ketchup (CD4 <50, URGENCIA ganciclovir IV, ceguera sin tratamiento)","MAC CD4 <50 (hemocultivos, azitromicina + etambutol, profilaxis azitromicina semanal)","TMF (TARV → CV indetectable → <1%, cesárea si CV >1000, NO lactancia, PCR diagnóstico <18 meses)"],
+resp:["Croup Parainfluenza-1 (tos perruna estridor inspiratorio, signo campanario Rx AP, dexametasona dosis única, Nelson 412)","VRS bronquiolitis (lactantes, Nelson 418, SOLO soporte O2+SRO, NO broncodilatadores NO corticoides rutina)","B. pertussis tosferina (paroxismos+whoop+vómito postusivo, leucocitosis LINFOCITOSIS, azitromicina, fase catarral más contagiosa)","S. pneumoniae NAC (bacteria #1 todas las edades, amoxicilina ambulatoria, CURB-65 hospitalización)","Mycoplasma walking pneumonia (>5 años adultos jóvenes, Rx peor que clínica, azitromicina, sin pared → β-lactámicos inútiles)","MIS-C post-COVID (2-6 semanas post-COVID, fiebre + ≥2 sistemas + inflamación, IVIG + AAS, disfunción VI 50%)"],
+snc:["Enterovirus meningitis aséptica (85-90% virales, LCR glucosa NORMAL, soporte, aciclovir empírico)","S. pneumoniae meningitis (ceftriaxona + dexametasona ANTES O CON 1ª dosis ATB, reduce sordera)","Listeria meningitis (>50 años embarazo VIH: ceftriaxona NO cubre → AMPICILINA OBLIGATORIA)","VHS-1 encefalitis (lóbulo temporal nervio olfatorio, afasia+comportamiento+convulsiones, aciclovir IV URGENTE sin esperar PCR, mortalidad 70% sin tx)","Anti-NMDAR encefalitis autoinmune (psicosis + discinesias + convulsiones, mujer joven, teratoma ovárico, IVIG)"],
+its:["Sífilis T. pallidum (chancro INDOLORO bordes indurados, VDRL+FTA-ABS, 2ª exantema PALMO-PLANTAR, penicilina G NUNCA resistencia)","HSV-2 herpes genital (úlcera DOLOROSA múltiple recurrente, aciclovir supresivo)","H. ducreyi chancroide (úlcera dolorosa + bubón fluctuante, azitromicina 1g dosis única)","Chlamydia L1-L3 LGV (bubón bilateral multilocular signo de la ranura, doxiciclina 21 días)","N. gonorrhoeae (diplococos GN intracelulares en PMN = diagnóstico directo, ceftriaxona IM, NO fluoroquinolonas)","Gardnerella vaginosis bacteriana (flujo gris + olor pescado + pH >4.5 + células clave, metronidazol)","Candida vulvovaginal (flujo grumoso blanco inodoro, pH <4.5, prurito intenso, fluconazol dosis única)"],
+};
+const ANGULOS=[
+  {id:"agente",n:"Agente etiológico",i:"Pregunta SOLO sobre el agente: nombre exacto, característica microbiológica distintiva o factor de virulencia. NO sobre clínica, diagnóstico ni tratamiento."},
+  {id:"clinica",n:"Clínica clásica",i:"Pregunta SOLO sobre clínica: síntoma cardinal, signo patognomónico o triada típica. NO sobre agente, laboratorio ni tratamiento."},
+  {id:"tx",n:"Tratamiento",i:"Pregunta SOLO sobre el fármaco de primera línea y por qué ese y no otro. NO sobre clínica ni diagnóstico."},
+  {id:"comp",n:"Complicación",i:"Pregunta SOLO sobre la complicación más importante y cuándo o por qué ocurre. NO sobre agente ni clínica inicial."},
+  {id:"dif",n:"Diferencial",i:"Pregunta SOLO sobre qué dato diferencia ESTA etiología de otra similar. Incluye ambas entidades en las opciones."},
+  {id:"err",n:"Error clásico",i:"Pregunta SOLO sobre el ERROR o CONTRAINDICACIÓN: qué NO se debe hacer y por qué. Usa forma negativa."},
+];
+const SYS_D=`Genera preguntas ENARM de infectología médica mexicana. Responde ÚNICAMENTE con JSON sin texto extra ni markdown:
+{"pregunta":"...","opciones":["...","...","...","..."],"correcta":0,"explicacion":"...","clave":"..."}
+correcta=índice 0-3. pregunta=directa máximo 2 líneas sin caso clínico. opciones=4 plausibles confundibles. explicacion=3 líneas por qué correcta y por qué las otras no. clave=frase memorable máximo 12 palabras.`;
+const SYS_C=`Genera casos clínicos ENARM de infectología médica mexicana. Responde ÚNICAMENTE con JSON sin texto extra ni markdown:
+{"caso":"...","pregunta":"...","opciones":["...","...","...","..."],"correcta":0,"explicacion":"...","clave":"..."}
+correcta=índice 0-3. caso=4 líneas con datos clínicos específicos. pregunta=diagnóstico/agente/tratamiento más probable. opciones=4 plausibles confundibles. explicacion=razonamiento diagnóstico 3-4 líneas. clave=dato patognomónico máximo 12 palabras.`;
+const LTRS=["A","B","C","D"];
+
+let S={
+  pan:"inicio",modo:null,temas:[],angs:ANGULOS.map(a=>a.id),allAngs:true,
+  q:null,cargando:false,err:null,resp:false,eleg:null,
+  ok:0,total:0,racha:0,hist:[],deck:[],
+};
+
+function mezclar(a){
+  const r=[...a];
+  for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}
+  return r;
+}
+function buildDeck(){
+  const aa=S.allAngs?ANGULOS.map(a=>a.id):S.angs;
+  const p=[];
+  S.temas.forEach(t=>(ETIO[t]||[]).forEach(e=>aa.forEach(a=>p.push({t,e,a}))));
+  S.deck=mezclar(p);
+}
+function nextPar(){
+  if(!S.deck.length)buildDeck();
+  return S.deck.shift()||{t:S.temas[0],e:(ETIO[S.temas[0]]||[""])[0],a:"agente"};
+}
+
+async function gen(){
+  if(!S.temas.length)return;
+  set({cargando:true,err:null,q:null,resp:false,eleg:null});
+  const par=nextPar();
+  const ang=ANGULOS.find(a=>a.id===par.a)||ANGULOS[0];
+  const mem=S.hist.length?`\nYA PREGUNTADO (NO REPETIR): ${S.hist.slice(-18).join(" | ")}`:"";
+  const sys=S.modo==="directo"?SYS_D:SYS_C;
+  const usr=S.modo==="directo"
+    ?`ETIOLOGÍA: ${par.e}\nINSTRUCCIÓN OBLIGATORIA DE TIPO: ${ang.i}${mem}\nGenera UNA pregunta directa exactamente del tipo indicado.`
+    :`ETIOLOGÍA: ${par.e}${mem}\nGenera UN caso clínico integrando agente, clínica, tratamiento de primera línea y complicación importante.`;
+  try{
+    const r=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",
+      headers:{"Content-Type":"application/json","anthropic-dangerous-direct-browser-iab":"true"},
+      body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:700,system:sys,messages:[{role:"user",content:usr}]}),
+    });
+    if(!r.ok){const t=await r.text().catch(()=>"");throw new Error("HTTP "+r.status+": "+t.substring(0,120));}
+    const d=await r.json();
+    const raw=d.content.map(c=>c.text||"").join("");
+    const clean=raw.replace(/```json|```/g,"").trim();
+    let q;
+    try{q=JSON.parse(clean);}catch{const m=raw.match(/\{[\s\S]*\}/);if(!m)throw new Error("Respuesta inválida");q=JSON.parse(m[0]);}
+    if(!q.pregunta||!Array.isArray(q.opciones)||q.opciones.length<4)throw new Error("Respuesta incompleta");
+    S.hist=[...S.hist,q.pregunta.substring(0,45)].slice(-60);
+    set({cargando:false,q:{...q,tid:par.t,aid:par.a}});
+  }catch(e){set({cargando:false,err:e.message});}
+}
+
+function elegir(idx){
+  if(S.resp||!S.q)return;
+  const ok=idx===S.q.correcta;
+  set({resp:true,eleg:idx,ok:S.ok+(ok?1:0),total:S.total+1,racha:ok?S.racha+1:0});
+  updStats();
+}
+function updStats(){
+  const el=document.getElementById("hdr-stats");
+  if(!el)return;
+  el.style.display=S.total?"flex":"none";
+  const pct=S.total?Math.round(S.ok/S.total*100):null;
+  document.getElementById("s-ok").textContent=S.ok;
+  document.getElementById("s-no").textContent=S.total-S.ok;
+  document.getElementById("s-pct").textContent=pct!==null?pct+"%":"—";
+}
+function set(p){Object.assign(S,p);render();}
+
+function togTema(id){set({temas:S.temas.includes(id)?S.temas.filter(x=>x!==id):[...S.temas,id]});}
+function togAng(id){
+  if(id==="all"){set({allAngs:true,angs:ANGULOS.map(a=>a.id)});return;}
+  const n=S.angs.includes(id)?S.angs.filter(x=>x!==id):[...S.angs,id];
+  set({allAngs:!n.length,angs:n.length?n:ANGULOS.map(a=>a.id)});
+}
+function iniciar(){if(!S.temas.length)return;buildDeck();S.hist=[];S.ok=0;S.total=0;S.racha=0;set({pan:"quiz"});gen();}
+
+function render(){
+  const app=document.getElementById("app");
+  const {pan,modo,temas,angs,allAngs,q,cargando,err,resp,eleg,ok,total,racha}=S;
+  updStats();
+
+  if(pan==="inicio"){
+    app.innerHTML=`<div class="screen">
+      <div class="home-hero">
+        <div class="home-icon">🏥</div>
+        <div class="home-title">ENARM Infectología</div>
+        <div class="home-sub">Agente · Clínica · Tratamiento · Complicaciones</div>
+        <div class="mode-grid">
+          <div class="mode-card" onclick="SM('directo')">
+            <div class="mode-icon">⚡</div>
+            <div class="mode-name">Preguntas directas</div>
+            <div class="mode-desc">Una pregunta concreta por dato. Sin caso clínico. Para repasar datos específicos rápido.</div>
+            <div class="mode-tag" style="background:#1a3a7a">Empezar →</div>
+          </div>
+          <div class="mode-card" onclick="SM('casos')">
+            <div class="mode-icon">🩺</div>
+            <div class="mode-name">Casos clínicos</div>
+            <div class="mode-desc">Paciente real con síntomas. Diagnóstico, agente, tratamiento y complicación integrados.</div>
+            <div class="mode-tag" style="background:#085041">Empezar →</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+    return;
+  }
+
+  if(pan==="config"){
+    app.innerHTML=`<div class="screen">
+      <div class="top-bar">
+        <button class="btn btn-sec btn-sm" onclick="GI()">← Inicio</button>
+        <span class="mode-badge">${modo==="directo"?"⚡ Preguntas directas":"🩺 Casos clínicos"}</span>
+      </div>
+      <div class="sec-label">Temas a repasar</div>
+      <div class="topic-grid">${TEMAS.map(t=>`<div class="tile${temas.includes(t.id)?" on":""}" onclick="TT('${t.id}')"><span style="font-size:15px">${t.e}</span><span class="tile-n">${t.n}</span>${temas.includes(t.id)?'<span class="tile-ck">✓</span>':""}</div>`).join("")}</div>
+      ${modo==="directo"?`<div class="sec-label">Enfoque (uno o varios)</div>
+      <div class="pills">
+        <div class="pill${allAngs?" on":""}" onclick="TA('all')">Todo</div>
+        ${ANGULOS.map(a=>`<div class="pill${!allAngs&&angs.includes(a.id)?" on":""}" onclick="TA('${a.id}')">${a.n}</div>`).join("")}
+      </div>`:""}
+      <div class="btn-row">
+        <button class="btn btn-sec" onclick="ST()">Todos los temas</button>
+        <button class="btn btn-pri" ${!temas.length?"disabled":""} onclick="IQ()">Generar primera pregunta →</button>
+        ${temas.length?`<span class="hint">${temas.length} tema(s) activo(s)</span>`:""}
+      </div>
+    </div>`;
+    return;
+  }
+
+  if(pan==="quiz"){
+    let body="";
+    if(cargando)body=`<div class="load-box"><div class="spinner"></div><p class="load-txt">Generando ${modo==="directo"?"pregunta":"caso clínico"}…</p></div>`;
+    else if(err)body=`<div class="err-box"><div class="err-title">Error al generar la pregunta</div><div class="err-msg">${err}</div><button class="btn btn-pri btn-sm" onclick="GQ()">↺ Reintentar</button></div>`;
+    else if(q){
+      if(modo==="casos"&&q.caso)body+=`<div class="caso-box"><div class="caso-lbl">Caso clínico</div><div class="caso-txt">${q.caso}</div></div>`;
+      body+=`<div class="q-card"><div class="q-txt">${q.pregunta}</div></div>`;
+      body+=`<div class="opts">${q.opciones.map((o,i)=>{let c="opt";if(resp){if(i===q.correcta)c+=" ok";else if(i===eleg&&i!==q.correcta)c+=" no";}return`<button class="${c}" ${resp?"disabled":""} onclick="EL(${i})"><span class="ltr">${LTRS[i]}</span><span style="flex:1">${o}</span></button>`}).join("")}</div>`;
+      if(resp){const isOk=eleg===q.correcta;body+=`<div class="fb ${isOk?"ok":"no"}"><div class="fb-head">${isOk?"✓ Correcto":"✗ Incorrecto — La respuesta es: "+q.opciones[q.correcta]}</div><div class="fb-body">${q.explicacion}${q.clave?`<div class="clave-box" style="margin-top:8px"><span class="clave-lbl">Dato clave</span>${q.clave}</div>`:""}</div></div>`;}
+    }
+    const pct=total?Math.round(ok/total*100):null;
+    app.innerHTML=`<div class="screen">
+      <div class="top-bar">
+        <button class="btn btn-sec btn-sm" onclick="GI()">← Inicio</button>
+        <span class="mode-badge">${modo==="directo"?"⚡ Directas":"🩺 Casos"}</span>
+        ${total?`<span class="stat-pill">${ok}/${total} · ${pct}%${racha>=3?" 🔥"+racha:""}</span>`:""}
+      </div>
+      ${body}
+      <div class="q-bottom">
+        <span class="racha">${racha>=3?"🔥 Racha de "+racha:""}</span>
+        <button class="btn btn-pri" ${resp?"":"disabled"} onclick="GQ()">Siguiente →</button>
+      </div>
+    </div>`;
+  }
+}
+window.SM=m=>{set({modo:m,pan:"config"});};
+window.GI=()=>{set({pan:"inicio",modo:null,temas:[],q:null,err:null});};
+window.TT=togTema;
+window.TA=togAng;
+window.ST=()=>set({temas:TEMAS.map(t=>t.id)});
+window.IQ=iniciar;
+window.GQ=gen;
+window.EL=elegir;
+render();
+</script>
+</body>
+</html>
