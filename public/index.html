@@ -9,12 +9,12 @@ body{margin:0;font-family:system-ui,sans-serif;background:#0a0d14;color:#eef0fa;
 .wrap{max-width:740px;margin:0 auto;padding:20px 16px 80px;}
 .hdr{padding:14px 0;border-bottom:1px solid #1a2540;margin-bottom:22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
 .logo{background:linear-gradient(135deg,#1a4a8a,#3b82f6);border-radius:8px;padding:7px 14px;font-weight:700;font-size:14px;}
-.stats{display:none;gap:14px;}.sn{font-size:18px;font-weight:700;font-family:monospace;line-height:1;}.sl{font-size:10px;color:#6b7aad;text-transform:uppercase;}
+.stats{display:none;gap:14px;}.sn{font-size:18px;font-weight:700;font-family:monospace;}.sl{font-size:10px;color:#6b7aad;text-transform:uppercase;}
 button{font-family:system-ui;cursor:pointer;border:none;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:500;}
 .bp{background:linear-gradient(135deg,#1a3a7a,#3b82f6);color:#fff;}.bp:disabled{background:#1a2540;color:#2e3d6a;cursor:not-allowed;}
 .bs{background:#0e1420;color:#6b7aad;border:1px solid #1a2540;}
 .mode-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:500px;margin:24px auto;}
-.mc{background:#0e1420;border:1.5px solid #1a2540;border-radius:12px;padding:20px;cursor:pointer;}.mc:hover{border-color:#3b82f6;}
+.mc{background:#0e1420;border:1.5px solid #1a2540;border-radius:12px;padding:20px;cursor:pointer;transition:.15s;}.mc:hover{border-color:#3b82f6;}
 .tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:7px;margin-bottom:16px;}
 .tile{background:#0e1420;border:1.5px solid #1a2540;border-radius:8px;padding:10px;cursor:pointer;display:flex;align-items:center;gap:7px;font-size:13px;}
 .tile.on{background:rgba(59,130,246,.1);border-color:#3b82f6;color:#7db4ff;}
@@ -29,8 +29,8 @@ button{font-family:system-ui;cursor:pointer;border:none;border-radius:8px;paddin
 .opt.ok .ltr{background:#22c55e;border-color:#22c55e;color:#fff;}.opt.no .ltr{background:#ef4444;border-color:#ef4444;color:#fff;}
 .fb{border-left:3px solid;border-radius:0 8px 8px 0;padding:12px 14px;margin-top:10px;font-size:13px;line-height:1.65;}
 .fb.ok{background:rgba(34,197,94,.07);border-color:#22c55e;}.fb.no{background:rgba(239,68,68,.05);border-color:#ef4444;}
-.fbt{font-size:12px;font-weight:700;margin-bottom:5px;}.fb.ok .fbt{color:#22c55e;}.fb.no .fbt{color:#ef4444;}
-.fbb{color:#6b7aad;}.clave{background:#131c2e;border:1px solid #1a2540;border-radius:6px;padding:8px 12px;margin-top:8px;}
+.fbt{font-size:12px;font-weight:700;margin-bottom:5px;}.fb.ok .fbt{color:#22c55e;}.fb.no .fbt{color:#ef4444;}.fbb{color:#6b7aad;}
+.clave{background:#131c2e;border:1px solid #1a2540;border-radius:6px;padding:8px 12px;margin-top:8px;}
 .spinner{width:24px;height:24px;border:2.5px solid #1a2540;border-top-color:#3b82f6;border-radius:50%;margin:0 auto 12px;animation:spin .6s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg)}}
 .errbox{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:14px 16px;margin-bottom:12px;}
@@ -58,7 +58,7 @@ var ET={
 ivu:["E. coli cistitis (fimbrias P, TMP-SMX 1a linea, nitrofurantoina solo cistitis NO pielonefritis)","S. saprophyticus (2a causa mujer joven, resistente novobiocina)","Klebsiella IVU (nosocomial, BLEE carbapenémico)","Proteus mirabilis (ureasa, orina alcalina, estruvita asta de ciervo)","Pielonefritis aguda (cilindros leucocitarios PATOGNOMONICOS, FQ ambulatoria, ceftriaxona IV)","Pionefrosis (obstruccion + infeccion, urgencia quirurgica)","Pielonefritis enfisematosa (gas intrarrenal diabetico, nefrectomia urgente)"],
 exant:["Sarampion Morbillivirus (manchas Koplik PATOGNOMONICAS 1-2d antes exantema, cefalocaudal)","Escarlatina GAS (papel de lija + lineas Pastia + Filatov, penicilina 10d previene FRA)","Rubeola (adenopatia retroauricular ANTES del exantema, SRC triada Gregg)","Parvovirus B19 (mejillas abofeadas reticulado en encaje, aplasia eritroide drepanocitosis)","Roseola VHH-6 (fiebre alta 3-5d cede bruscamente exantema, crisis febriles 30%)","Varicela VVZ (cielo estrellado distintos estadios, NO aspirina Sindrome Reye)","Kawasaki (fiebre 5d + 4 criterios, IVIG 2g/kg + AAS, aneurismas coronarios 20-25%)","VEB mononucleosis (adenopatia posterior, monospot+, NO ampicilina exantema 80-100%)"],
 dia:["Rotavirus (lactantes invierno, SRO, vacuna, NO ATB)","Vibrio cholerae (agua de arroz, SRO mortalidad 50% sin ella, doxiciclina)","Shigella (disenteria, convulsiones febriles, azitromicina)","Salmonella no tifoidea (NO ATB inmunocompetentes prolonga portador)","S. Typhi fiebre tifoidea (fiebre escalonada + bradicardia relativa + manchas Faget, perforacion ileal 3a semana)","E. coli O157:H7 STEC (SHU, NO ATB x5 riesgo, NO loperamida)","C. difficile (post-ATB, pseudomembranas, vancomicina VO o fidaxomicina, NO metronidazol 1a linea)","Giardia lamblia (quistes 4 nucleos, malabsorcion, metronidazol)","Entamoeba histolytica (trofozoitos con eritrocitos fagocitados PATOGNOMONICO, absceso hepatico)"],
-vect:["Dengue DENV 1-4 Aedes aegypti (NS1 dias 1-5, dolor retroorbitario, ADE 2a infeccion, NO AINE)","Zika ZIKV (exantema pruriginoso conjuntivitis bilateral, microcefalia AXL, SGB post-Zika)","Chikungunya CHIKV el que se encorva (artritis DEBILITANTE bilateral, 30-40% cronica)","P. falciparum (invade TODOS eritrocitos, malaria cerebral PfEMP1, artesunato IV OMS 2023)","P. vivax y ovale (hipnozoitos recaidas verdaderas, cloroquina + primaquina, VERIFICAR G6PD)","Rickettsia rickettsii FMMR (garrapata, exantema centripeto palmas+plantas, doxiciclina TODAS las edades)"],
+vect:["Dengue DENV 1-4 (NS1 dias 1-5, dolor retroorbitario, ADE 2a infeccion, NO AINE)","Zika ZIKV (exantema pruriginoso conjuntivitis bilateral, microcefalia AXL, SGB post-Zika)","Chikungunya CHIKV el que se encorva (artritis DEBILITANTE bilateral, 30-40% cronica)","P. falciparum (invade TODOS eritrocitos, malaria cerebral PfEMP1, artesunato IV OMS 2023)","P. vivax y ovale (hipnozoitos recaidas verdaderas, cloroquina + primaquina, VERIFICAR G6PD)","Rickettsia rickettsii FMMR (garrapata, exantema centripeto palmas+plantas, doxiciclina TODAS las edades)"],
 tb:["M. tuberculosis BAAR aerobio (LAM inhibe fagosoma-lisosoma, acidos micolicos)","TB triada (tos mayor 2-3 sem + sudoracion nocturna + perdida de peso)","TB miliar (nodulos 1-3mm bilaterales, urgencia)","Mal de Pott TB vertebral (D10-L1, cifosis, absceso psoas, paraplejia)","TB meningea (LCR glucosa baja + ADA elevada + BAAR 10-40%)","Xpert MTB/RIF (2 horas, TB + resistencia rifampicina)","Esquema 2HRZE/4HR (H neuropatia piridoxina, R hepatitis, Z hiperuricemia, E neuritis optica)","TB-MDR BPaLM (resistencia H+R, 6 meses)","TB-VIH (TARV 2 semanas despues, meningitis TB diferir 4-6 sem)"],
 vih:["VIH CD4+CCR5/CXCR4 (SRA ELISA negativo, ARN VIH + Ag p24)","SIDA CDC (CD4 menor 200 O enfermedad definitoria 27 condiciones)","TARV universal Biktarvy TAF+FTC+BIC (todos, meta CV menor 50, U=U)","PCP (CD4 menor 200, TMP-SMX altas dosis + prednisona si PaO2 menor 70)","Criptococo meningeo (anfotericina B + flucitosina 2 sem, fluconazol, punciones HIC)","Toxoplasmosis cerebral (lesion anillo CD4 menor 100, tratar EMPIRICO, biopsia si no responde)","CMV retinitis queso y ketchup (CD4 menor 50, URGENCIA ganciclovir IV)","MAC CD4 menor 50 (hemocultivos, azitromicina + etambutol)","TMF (TARV CV indetectable menor 1%, PCR diagnostico menor 18 meses)"],
 resp:["Croup Parainfluenza-1 (tos perruna estridor, signo campanario Rx, dexametasona dosis unica)","VRS bronquiolitis (lactantes, SOLO soporte, NO broncodilatadores NO corticoides)","B. pertussis tosferina (paroxismos+whoop+vomito, leucocitosis LINFOCITOSIS, azitromicina)","S. pneumoniae NAC (bacteria num1 todas edades, amoxicilina ambulatoria)","Mycoplasma walking pneumonia (Rx peor que clinica, azitromicina, sin pared)","MIS-C post-COVID (2-6 semanas, IVIG + AAS, disfuncion VI 50%)"],
@@ -73,11 +73,11 @@ var ANG=[
 {id:"dif",n:"Diferencial",i:"Pregunta SOLO sobre el dato que diferencia ESTA etiologia de otra similar."},
 {id:"err",n:"Error",i:"Pregunta SOLO sobre el ERROR o CONTRAINDICACION clasica. Usa forma negativa."}
 ];
-var SD='Genera preguntas ENARM infectologia mexicana. SOLO JSON sin markdown: {"pregunta":"...","opciones":["...","...","...","..."],"correcta":0,"explicacion":"...","clave":"..."} correcta=indice 0-3. pregunta=directa 1-2 lineas. opciones=4 plausibles confundibles. explicacion=3 lineas. clave=frase memorable max 12 palabras.';
-var SC='Genera casos clinicos ENARM infectologia mexicana. SOLO JSON sin markdown: {"caso":"...","pregunta":"...","opciones":["...","...","...","..."],"correcta":0,"explicacion":"...","clave":"..."} correcta=indice 0-3. caso=4 lineas datos clinicos. pregunta=diagnostico/agente/tratamiento. opciones=4 plausibles. explicacion=3-4 lineas. clave=dato patognomonico.';
+var SD="Genera preguntas ENARM infectologia mexicana. SOLO JSON sin markdown: {pregunta,opciones[4],correcta,explicacion,clave} correcta=indice 0-3. pregunta=directa 1-2 lineas. opciones=4 plausibles. explicacion=3 lineas. clave=frase max 12 palabras.";
+var SC="Genera casos clinicos ENARM infectologia mexicana. SOLO JSON sin markdown: {caso,pregunta,opciones[4],correcta,explicacion,clave} correcta=indice 0-3. caso=4 lineas datos clinicos. pregunta=diagnostico/agente/tratamiento. opciones=4 plausibles. explicacion=3-4 lineas. clave=dato patognomonico.";
 var LT=["A","B","C","D"];
 var S={p:"home",m:null,t:[],a:ANG.map(function(x){return x.id;}),aa:true,q:null,c:false,e:null,r:false,el:null,ok:0,tot:0,rc:0,h:[],dk:[]};
-function mx(a){var r=a.slice();for(var i=r.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=r[i];r[i]=r[j];r[j]=tmp;}return r;}
+function mx(a){var r=a.slice();for(var i=r.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=r[i];r[i]=r[j];r[j]=t;}return r;}
 function bD(){var aa=S.aa?ANG.map(function(x){return x.id;}):S.a;var p=[];S.t.forEach(function(t){(ET[t]||[]).forEach(function(e){aa.forEach(function(a){p.push({t:t,e:e,a:a});});});});S.dk=mx(p);}
 function nP(){if(!S.dk.length)bD();return S.dk.shift()||{t:S.t[0],e:(ET[S.t[0]]||[""])[0],a:"agente"};}
 function gen(){
@@ -85,44 +85,126 @@ function gen(){
   set({c:true,e:null,q:null,r:false,el:null});
   var par=nP();
   var ang=ANG.filter(function(x){return x.id===par.a;})[0]||ANG[0];
-  var mem=S.h.length?"
-YA PREGUNTADO NO REPETIR: "+S.h.slice(-15).join(" | "):"";
+  var mem=S.h.length?"\nYA PREGUNTADO NO REPETIR: "+S.h.slice(-15).join(" | "):"";
   var sys=S.m==="d"?SD:SC;
-  var usr=S.m==="d"?"ETIOLOGIA: "+par.e+"
-INSTRUCCION: "+ang.i+mem+"
-Genera UNA pregunta directa del tipo indicado."
-    :"ETIOLOGIA: "+par.e+mem+"
-Genera UN caso clinico con agente, clinica, tratamiento y complicacion.";
+  var usr=S.m==="d"?"ETIOLOGIA: "+par.e+"\nINSTRUCCION: "+ang.i+mem+"\nGenera UNA pregunta directa del tipo indicado."
+    :"ETIOLOGIA: "+par.e+mem+"\nGenera UN caso clinico con agente, clinica, tratamiento y complicacion.";
   fetch("/api/ask",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:700,system:sys,messages:[{role:"user",content:usr}]})})
   .then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();})
   .then(function(d){
-    var raw=d.content.map(function(c){return c.text||"";}).join("").replace(/[`]{3}json/g,"").replace(/[`]{3}/g,"").trim();
+    var raw=d.content.map(function(c){return c.text||"";}).join("");
+    raw=raw.replace(/[`]{3}json/g,"").replace(/[`]{3}/g,"").trim();
     var q;
-    try{q=JSON.parse(raw);}catch(ex){var m=raw.match(/{[sS]*}/);if(!m)throw new Error("JSON invalido");q=JSON.parse(m[0]);}
+    try{q=JSON.parse(raw);}catch(ex){var m=raw.match(/\{[\s\S]*\}/);if(!m)throw new Error("JSON invalido");q=JSON.parse(m[0]);}
     if(!q.pregunta||!Array.isArray(q.opciones)||q.opciones.length<4)throw new Error("Respuesta incompleta");
     S.h=S.h.concat([q.pregunta.substring(0,40)]).slice(-60);
-    set({c:false,q:{pregunta:q.pregunta,opciones:q.opciones,correcta:q.correcta,explicacion:q.explicacion,clave:q.clave,caso:q.caso,tid:par.t,aid:par.a}});
+    set({c:false,q:{pregunta:q.pregunta,opciones:q.opciones,correcta:q.correcta,explicacion:q.explicacion,clave:q.clave,caso:q.caso}});
   })
   .catch(function(ex){set({c:false,e:ex.message});});
 }
 function eleg(i){if(S.r||!S.q)return;var ok=i===S.q.correcta;set({r:true,el:i,ok:S.ok+(ok?1:0),tot:S.tot+1,rc:ok?S.rc+1:0});uS();}
 function uS(){var e=document.getElementById("stats");if(!e)return;e.style.display=S.tot?"flex":"none";var p=S.tot?Math.floor(S.ok/S.tot*100):null;document.getElementById("sok").textContent=S.ok;document.getElementById("sno").textContent=S.tot-S.ok;document.getElementById("spct").textContent=p!==null?p+"%":"--";}
-function set(p){var k=Object.keys(p);for(var i=0;i<k.length;i++)S[k[i]]=p[k[i]];R();}
+function set(p){Object.keys(p).forEach(function(k){S[k]=p[k];});R();}
 function tT(id){var t=S.t.slice();var i=t.indexOf(id);if(i>=0)t.splice(i,1);else t.push(id);set({t:t});}
 function tA(id){if(id==="all"){set({aa:true,a:ANG.map(function(x){return x.id;})});return;}var n=S.a.slice();var i=n.indexOf(id);if(i>=0)n.splice(i,1);else n.push(id);set({aa:!n.length,a:n.length?n:ANG.map(function(x){return x.id;})});}
 function ini(){if(!S.t.length)return;bD();S.h=[];S.ok=0;S.tot=0;S.rc=0;set({p:"quiz"});gen();}
+function el(el){
+  el.addEventListener("click",function(ev){
+    var act=ev.currentTarget.dataset.act;
+    var val=ev.currentTarget.dataset.val;
+    if(act==="sm")set({m:val,p:"config"});
+    else if(act==="gi")set({p:"home",m:null,t:[],q:null,e:null});
+    else if(act==="tt")tT(val);
+    else if(act==="ta")tA(val);
+    else if(act==="st")set({t:TM.map(function(x){return x.id;})});
+    else if(act==="ini")ini();
+    else if(act==="gen")gen();
+    else if(act==="el")eleg(parseInt(val));
+  });
+  return el;
+}
+function mk(tag,attrs,html){
+  var e=document.createElement(tag);
+  Object.keys(attrs).forEach(function(k){if(k==="class")e.className=attrs[k];else e.setAttribute(k,attrs[k]);});
+  if(html!==undefined)e.innerHTML=html;
+  return e;
+}
 function R(){
   var app=document.getElementById("app");if(!app)return;uS();
-  var p=S.p,m=S.m,t=S.t,a=S.a,aa=S.aa,q=S.q,c=S.c,e=S.e,r=S.r,el=S.el,ok=S.ok,tot=S.tot,rc=S.rc;
-  if(p==="home"){app.innerHTML='<div style="text-align:center;padding:40px 0 30px"><div style="font-size:26px;font-weight:700;margin-bottom:8px">ENARM Infectologia</div><div style="color:#6b7aad;margin-bottom:28px">Agente - Clinica - Tratamiento - Complicaciones</div><div class="mode-row"><div class="mc" onclick="SM('d')"><div style="font-size:18px;font-weight:600;margin-bottom:8px">Preguntas directas</div><div style="color:#6b7aad;font-size:13px;margin-bottom:14px">Una pregunta, un dato concreto.</div><button class="bp" style="width:100%" onclick="SM('d')">Empezar</button></div><div class="mc" onclick="SM('c')"><div style="font-size:18px;font-weight:600;margin-bottom:8px">Casos clinicos</div><div style="color:#6b7aad;font-size:13px;margin-bottom:14px">Paciente real con diagnostico y tratamiento.</div><button class="bp" style="background:linear-gradient(135deg,#085041,#0f6e56);width:100%" onclick="SM('c')">Empezar</button></div></div></div>';return;}
-  if(p==="config"){var tH=TM.map(function(x){return'<div class="tile'+(t.indexOf(x.id)>=0?" on":"")+'" onclick="TT(''+x.id+'')">'+x.n+(t.indexOf(x.id)>=0?' <span style="margin-left:auto;font-size:10px;color:#3b82f6">ok</span>':"")+' </div>';}).join("");var pH=aa?"":'<div class="pill on" onclick="TA('all')">Todo</div>'+ANG.map(function(x){return'<div class="pill'+(a.indexOf(x.id)>=0?" on":"")+'" onclick="TA(''+x.id+'')">'+x.n+'</div>';}).join("");app.innerHTML='<div><div class="topbar"><button class="bs" onclick="GI()">Inicio</button><span style="color:#6b7aad;font-size:13px">'+(m==="d"?"Preguntas directas":"Casos clinicos")+'</span></div><div style="font-size:11px;font-weight:600;text-transform:uppercase;color:#6b7aad;margin-bottom:8px">Temas</div><div class="tgrid">'+tH+'</div>'+(m==="d"?'<div style="font-size:11px;font-weight:600;text-transform:uppercase;color:#6b7aad;margin-bottom:8px">Enfoque</div><div class="pills"><div class="pill'+(aa?" on":"")+'" onclick="TA('all')">Todo</div>'+ANG.map(function(x){return'<div class="pill'+(a.indexOf(x.id)>=0&&!aa?" on":"")+'" onclick="TA(''+x.id+'')">'+x.n+'</div>';}).join("")+'</div>':"")+'<div style="display:flex;gap:10px;margin-top:4px"><button class="bs" onclick="ST()">Todos los temas</button><button class="bp" '+(t.length?"":"disabled")+' onclick="INI()">Generar primera pregunta</button></div></div>';return;}
-  if(p==="quiz"){var b="";if(c){b='<div style="text-align:center;padding:52px 0"><div class="spinner"></div><p style="color:#6b7aad">Generando '+(m==="d"?"pregunta":"caso clinico")+'...</p></div>';}else if(e){b='<div class="errbox"><div style="color:#ef4444;font-weight:600;margin-bottom:4px">Error al generar</div><div style="color:#6b7aad;font-size:12px;margin-bottom:10px">'+e+'</div><button class="bp" onclick="GEN()">Reintentar</button></div>';}else if(q){if(m==="c"&&q.caso){b+='<div class="cbox"><div style="font-size:10px;font-weight:700;text-transform:uppercase;color:#3b82f6;margin-bottom:5px">Caso clinico</div><div style="font-size:14px;color:#6b7aad;line-height:1.65">'+q.caso+'</div></div>';}b+='<div class="qcard">'+q.pregunta+'</div>';var oH=q.opciones.map(function(o,i){var cl="opt";if(r){if(i===q.correcta)cl+=" ok";else if(i===el&&i!==q.correcta)cl+=" no";}return'<button class="'+cl+'" '+(r?"disabled ":"")+'onclick="EL('+i+')"><span class="ltr">'+LT[i]+'</span><span style="flex:1">'+o+'</span></button>';}).join("");b+='<div class="opts">'+oH+'</div>';if(r){var io=el===q.correcta;b+='<div class="fb '+(io?"ok":"no")+'"><div class="fbt">'+(io?"Correcto":"Incorrecto - Respuesta correcta: "+q.opciones[q.correcta])+'</div><div class="fbb">'+q.explicacion+(q.clave?'<div class="clave"><strong>Dato clave:</strong> '+q.clave+'</div>':"")+'</div></div>';}}var p2=tot?Math.floor(ok/tot*100):null;app.innerHTML='<div><div class="topbar"><button class="bs" onclick="GI()">Inicio</button><span style="color:#6b7aad;font-size:12px">'+(m==="d"?"Directas":"Casos")+'</span>'+(tot?'<span class="spill">'+ok+'/'+tot+' - '+p2+'%'+(rc>=3?" R"+rc:'')+'</span>':"")+'</div>'+b+'<div class="qbot"><span style="color:#f59e0b;font-size:13px;font-weight:600">'+(rc>=3?"Racha "+rc:"")+'</span><button class="bp" '+(r?"":"disabled ")+' onclick="GEN()">Siguiente</button></div></div>';}
+  while(app.firstChild)app.removeChild(app.firstChild);
+  var p=S.p,m=S.m,t=S.t,a=S.a,aa=S.aa,q=S.q,c=S.c,e=S.e,r=S.r,eli=S.el,ok=S.ok,tot=S.tot,rc=S.rc;
+  
+  if(p==="home"){
+    var div=mk("div",{style:"text-align:center;padding:40px 0 30px"});
+    div.appendChild(mk("div",{style:"font-size:26px;font-weight:700;margin-bottom:8px"},"ENARM Infectologia"));
+    div.appendChild(mk("div",{style:"color:#6b7aad;margin-bottom:28px"},"Agente - Clinica - Tratamiento - Complicaciones"));
+    var row=mk("div",{"class":"mode-row"});
+    var c1=mk("div",{"class":"mc","data-act":"sm","data-val":"d"});
+    c1.innerHTML="<div style='font-size:18px;font-weight:600;margin-bottom:8px'>Preguntas directas</div><div style='color:#6b7aad;font-size:13px;margin-bottom:14px'>Una pregunta, un dato concreto.</div>";
+    var b1=mk("button",{"class":"bp","style":"width:100%","data-act":"sm","data-val":"d"},"Empezar");
+    el(b1);c1.appendChild(b1);el(c1);row.appendChild(c1);
+    var c2=mk("div",{"class":"mc","data-act":"sm","data-val":"c"});
+    c2.innerHTML="<div style='font-size:18px;font-weight:600;margin-bottom:8px'>Casos clinicos</div><div style='color:#6b7aad;font-size:13px;margin-bottom:14px'>Paciente real con diagnostico y tratamiento.</div>";
+    var b2=mk("button",{"class":"bp","style":"background:linear-gradient(135deg,#085041,#0f6e56);width:100%","data-act":"sm","data-val":"c"},"Empezar");
+    el(b2);c2.appendChild(b2);el(c2);row.appendChild(c2);
+    div.appendChild(row);app.appendChild(div);return;
+  }
+  
+  if(p==="config"){
+    var wrap=mk("div",{});
+    var tb=mk("div",{"class":"topbar"});
+    var back=mk("button",{"class":"bs","data-act":"gi"},"Inicio");el(back);tb.appendChild(back);
+    tb.appendChild(mk("span",{style:"color:#6b7aad;font-size:13px"},m==="d"?"Preguntas directas":"Casos clinicos"));
+    wrap.appendChild(tb);
+    wrap.appendChild(mk("div",{style:"font-size:11px;font-weight:600;text-transform:uppercase;color:#6b7aad;margin-bottom:8px"},"Temas"));
+    var tg=mk("div",{"class":"tgrid"});
+    TM.forEach(function(x){
+      var ti=mk("div",{"class":"tile"+(t.indexOf(x.id)>=0?" on":""),"data-act":"tt","data-val":x.id},x.n+(t.indexOf(x.id)>=0?" <span style='margin-left:auto;font-size:10px;color:#3b82f6'>ok</span>":"")+" ");
+      el(ti);tg.appendChild(ti);
+    });
+    wrap.appendChild(tg);
+    if(m==="d"){
+      wrap.appendChild(mk("div",{style:"font-size:11px;font-weight:600;text-transform:uppercase;color:#6b7aad;margin-bottom:8px"},"Enfoque"));
+      var pls=mk("div",{"class":"pills"});
+      var pa=mk("div",{"class":"pill"+(aa?" on":""),"data-act":"ta","data-val":"all"},"Todo");el(pa);pls.appendChild(pa);
+      ANG.forEach(function(x){var pi=mk("div",{"class":"pill"+(a.indexOf(x.id)>=0&&!aa?" on":""),"data-act":"ta","data-val":x.id},x.n);el(pi);pls.appendChild(pi);});
+      wrap.appendChild(pls);
+    }
+    var br=mk("div",{style:"display:flex;gap:10px;margin-top:4px"});
+    var st=mk("button",{"class":"bs","data-act":"st"},"Todos los temas");el(st);br.appendChild(st);
+    var go=mk("button",{"class":"bp","data-act":"ini"},"Generar primera pregunta");if(!t.length)go.disabled=true;el(go);br.appendChild(go);
+    wrap.appendChild(br);app.appendChild(wrap);return;
+  }
+  
+  if(p==="quiz"){
+    var wrap=mk("div",{});
+    var tb=mk("div",{"class":"topbar"});
+    var back=mk("button",{"class":"bs","data-act":"gi"},"Inicio");el(back);tb.appendChild(back);
+    tb.appendChild(mk("span",{style:"color:#6b7aad;font-size:12px"},m==="d"?"Directas":"Casos"));
+    if(tot){var sp=mk("span",{"class":"spill"},ok+"/"+tot+" - "+Math.floor(ok/tot*100)+"%"+(rc>=3?" R"+rc:""));tb.appendChild(sp);}
+    wrap.appendChild(tb);
+    if(c){var lb=mk("div",{style:"text-align:center;padding:52px 0"});lb.innerHTML="<div class='spinner'></div>";lb.appendChild(mk("p",{style:"color:#6b7aad"},"Generando "+(m==="d"?"pregunta":"caso clinico")+"..."));wrap.appendChild(lb);}
+    else if(e){var eb=mk("div",{"class":"errbox"});eb.innerHTML="<div style='color:#ef4444;font-weight:600;margin-bottom:4px'>Error al generar</div>";eb.appendChild(mk("div",{style:"color:#6b7aad;font-size:12px;margin-bottom:10px"},e));var rt=mk("button",{"class":"bp","data-act":"gen"},"Reintentar");el(rt);eb.appendChild(rt);wrap.appendChild(eb);}
+    else if(q){
+      if(m==="c"&&q.caso){var cb=mk("div",{"class":"cbox"});cb.innerHTML="<div style='font-size:10px;font-weight:700;text-transform:uppercase;color:#3b82f6;margin-bottom:5px'>Caso clinico</div><div style='font-size:14px;color:#6b7aad;line-height:1.65'>"+q.caso+"</div>";wrap.appendChild(cb);}
+      wrap.appendChild(mk("div",{"class":"qcard"},q.pregunta));
+      var opts=mk("div",{"class":"opts"});
+      q.opciones.forEach(function(o,i){
+        var cl="opt";if(r){if(i===q.correcta)cl+=" ok";else if(i===eli&&i!==q.correcta)cl+=" no";}
+        var btn=mk("button",{"class":cl,"data-act":"el","data-val":String(i)},"");
+        btn.appendChild(mk("span",{"class":"ltr"},LT[i]));btn.appendChild(mk("span",{style:"flex:1"},o));
+        if(r)btn.disabled=true;else el(btn);
+        opts.appendChild(btn);
+      });
+      wrap.appendChild(opts);
+      if(r){var io=eli===q.correcta;var fb=mk("div",{"class":"fb "+(io?"ok":"no")});fb.appendChild(mk("div",{"class":"fbt"},io?"Correcto":"Incorrecto - Respuesta correcta: "+q.opciones[q.correcta]));var fbb=mk("div",{"class":"fbb"},q.explicacion);if(q.clave){var kv=mk("div",{"class":"clave"},"");kv.innerHTML="<strong>Dato clave:</strong> "+q.clave;fbb.appendChild(kv);}fb.appendChild(fbb);wrap.appendChild(fb);}
+    }
+    var qb=mk("div",{"class":"qbot"});
+    qb.appendChild(mk("span",{style:"color:#f59e0b;font-size:13px;font-weight:600"},rc>=3?"Racha "+rc:""));
+    var nx=mk("button",{"class":"bp","data-act":"gen"},"Siguiente");if(!r)nx.disabled=true;else el(nx);qb.appendChild(nx);
+    wrap.appendChild(qb);app.appendChild(wrap);
+  }
 }
-function SM(m){set({m:m,p:"config"});}
-function GI(){set({p:"home",m:null,t:[],q:null,e:null});}
-function TT(id){tT(id);}function TA(id){tA(id);}
-function ST(){set({t:TM.map(function(x){return x.id;})});}
-function INI(){ini();}function GEN(){gen();}function EL(i){eleg(i);}
 R();
 </script>
 </body>
